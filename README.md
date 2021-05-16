@@ -55,7 +55,7 @@ Below is a screenshot that illustrates the relationship between the different en
  - _certificate_bundles_ and _seller_ are linked as _many to one_ since one _seller_ could have multiple _certificate_bundles_ and one _certificate_bundles_ could only have been created by one _seller_ 
  - _interests_ and _buyer_ are linked similarly as well
  - _certificate_bundles_ and _energy_source_ are linked as _many to one_ (similar to _certificate_bundles_ and _seller_)
- - _interests_ and _energy_source_ are not linked directly since interests can be having energy sources which are not supported and thus remain unmatched 
+ - _interests_ and _energy_source_ are not linked directly since interests can include energy sources which are not supported and thus remain unmatched 
  - _order_book_ will contain the matching entries between _interests_ and _certificate_bundles_
 
 ![DBD_Certificate_Matching](https://user-images.githubusercontent.com/78940516/118381131-71be2f80-b5f0-11eb-8ee4-01bede842600.png)
