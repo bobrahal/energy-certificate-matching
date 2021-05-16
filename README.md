@@ -47,7 +47,17 @@ http://localhost:8080/add-interest
     "quantity": 500
 }
 ```
+## Table of Contents
+ - [ Database Structure ](#db)
+ - [ Dependencies ](#dp)
+ - [ Start-up ](#su)
+ - [ Tests ](#tst)
+ - [ Output ](#ou)
+ - [ Directory structure ](#ds)
+ - [ Design decisions ](#dd)
+ - [ Random Thoughts ](#rt)
 
+<a name="db"></a>
 ## Database Structure
 
 Below is a screenshot that illustrates the relationship between the different entities:
@@ -85,10 +95,11 @@ spring:
         use_sql_comments: true
         format_sql: true
 ```
-
+<a name="dp"></a>
 ## Dependencies
 [See Here](https://github.com/bobrahal/energy-certificate-matching/blob/master/pom.xml)
 
+<a name="su"></a>
 ## Start-up
 Run the following command:<br/>
 ```
@@ -96,11 +107,13 @@ mvn spring-boot:run
 ```
 For the sake of simplicity, the application runs on a in-memory H2 database which is populated on start-up with 3 _EnergySources_, 5 _Sellers_ and 3 _Buyers_
 
+<a name="tst"></a>
 ## Tests
 Run Tests:
 ```
 mvn clean test
 ```
+<a name="ou"></a>
 ## Output
 ### Postman outputs
 #### Adding _CertificateBundle_ using /add-bundle url. Nominal Case (200 OK)
@@ -163,6 +176,7 @@ mvn clean test
 }
 ```
 
+<a name="ds"></a>
 ## Directory structure
 ```
 |-src
@@ -182,7 +196,15 @@ mvn clean test
 	\---test # contains unit and integration tests
 ```
 
+<a name="dd"></a>
 ## Design decisions
  - Persistence mapping is done using [boilerplate entities](https://github.com/bobrahal/energy-certificate-matching/blob/master/src/main/kotlin/com/cerqlar/certificate/matching/infrastructure/db/order/bundle/CertificateBundleEntity.kt)
    and [conversions](https://github.com/bobrahal/energy-certificate-matching/blob/master/src/main/kotlin/com/cerqlar/certificate/matching/infrastructure/db/order/bundle/CertificateBundleH2Repository.kt) in order to keep [domain](https://github.com/bobrahal/energy-certificate-matching/blob/master/src/main/kotlin/com/cerqlar/certificate/matching/domain/order/bundle/CertificateBundle.kt) free of external libraries/framework dependencies
  - Non-nominal execution flows are handled using `Exception` throwing and Exception handlers from [ControllerAdvice](https://github.com/bobrahal/energy-certificate-matching/blob/master/src/main/kotlin/com/cerqlar/certificate/matching/infrastructure/http/routing/ControllerAdvice.kt)
+
+<a name="rt"></a>
+## Random Thoughts
+In a real world application, the matching engine would be implemented different to what I have done in this simple implementation.
+ - The matching engine will be running as a separate process/application in a separate server using active-active or active-passive model along with a load balancer.
+ - Adding caching mechanisms for better performance as well as a persistence layer for logging and recovery in case all nodes fail.
+ - Event publishing where other systems/apps (Website or a mobile application) can subscribe to.
