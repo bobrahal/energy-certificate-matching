@@ -99,7 +99,7 @@ For the sake of simplicity, the application runs on a in-memory H2 database whic
 ## Tests
 Run Tests:
 ```
-mvn test
+mvn clean test
 ```
 ## Output
 ### Postman outputs
